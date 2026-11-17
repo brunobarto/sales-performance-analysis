@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GROOVE&amp;GRID — Sales Performance Analysis</title>
+  <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)" />
+  <link rel="preconnect" href="[fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin />
+  <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;800;900&display=swap)" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- STAR BACKGROUND -->
+  <canvas id="stars"></canvas>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-shapes">
+      <span class="ls circle"></span><span class="ls square"></span><span class="ls triangle"></span>
+    </div>
+    <p class="loader-title" data-i18n="loading">CHARGING PROJECT</p>
+    <div class="loader-bar"><div id="loaderFill"></div></div>
+    <p id="loaderPct">0%</p>
+  </div>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="b-circle"></span><span class="b-square"></span><span class="b-tri"></span>
+      <strong>GROOVE&amp;GRID</strong>
+    </div>
+    <div class="controls">
+      <div class="accent-picker" title="Accent">
+        <button class="swatch" data-color="#D62828" style="--c:#D62828"></button>
+        <button class="swatch" data-color="#F2B705" style="--c:#F2B705"></button>
+        <button class="swatch" data-color="#2B59C3" style="--c:#2B59C3"></button>
+        <button class="swatch" data-color="#1B998B" style="--c:#1B998B"></button>
+        <label class="swatch custom" title="Custom">
+          <input type="color" id="accentInput" value="#D62828" />
+        </label>
+      </div>
+      <button id="langBtn" class="ctrl-btn" aria-label="Language">
+        <span data-l="en">EN</span><span class="sep">/</span><span data-l="fr">FR</span>
+      </button>
+      <button id="themeBtn" class="theme-toggle" aria-label="Theme">
+        <span class="icon sun">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><g stroke-width="2"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.2" y1="4.2" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.8" y2="19.8"/><line x1="4.2" y1="19.8" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.8" y2="4.2"/></g></svg>
+        </span>
+        <span class="icon moon">
+          <svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </span>
+        <span class="knob"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <p class="tag" data-i18n="tag">DATA ANALYSIS PROJECT · FY 2025</p>
+        <h1 data-i18n="title">Sales Performance Analysis</h1>
+        <p class="sub" data-i18n="subtitle">Music retailer — vinyl, CDs, turntables &amp; hi-fi. Revenue, customers and products analysed to drive decisions.</p>
+        <p class="hint" data-i18n="hint">▸ Click any chart for the explanation &amp; business insight.</p>
+      </div>
+      <div class="hero-art">
+        <div class="art-circle"></div><div class="art-square"></div><div class="art-tri"></div><div class="art-bar"></div>
+      </div>
+    </section>
+
+    <!-- KPIs -->
+    <section class="kpis">
+      <div class="kpi"><span class="kpi-label" data-i18n="kRev">Revenue 2025</span><span class="kpi-val" data-count="605.8" data-fmt="money">0</span><span class="kpi-delta up">▲ +13.0% YoY</span></div>
+      <div class="kpi"><span class="kpi-label" data-i18n="kOrd">Orders</span><span class="kpi-val" data-count="9412" data-fmt="int">0</span><span class="kpi-delta up">▲ +8.4% YoY</span></div>
+      <div class="kpi"><span class="kpi-label" data-i18n="kAov">Avg. order value</span><span class="kpi-val" data-count="64.4" data-fmt="eur">0</span><span class="kpi-delta up">▲ +4.2% YoY</span></div>
+      <div class="kpi"><span class="kpi-label" data-i18n="kCus">Active customers</span><span class="kpi-val" data-count="3186" data-fmt="int">0</span><span class="kpi-delta up">▲ +6.1% YoY</span></div>
+    </section>
+
+    <!-- CHARTS -->
+    <section class="grid">
+      <article class="card wide" data-info="trend">
+        <header><span class="num">01</span><h2 data-i18n="cTrend">How does revenue trend over time?</h2><button class="info">i</button></header>
+        <div class="chart" id="chTrend"></div>
+      </article>
+
+      <article class="card" data-info="country">
+        <header><span class="num">02</span><h2 data-i18n="cCountry">Which countries generate the most revenue?</h2><button class="info">i</button></header>
+        <div class="chart" id="chCountry"></div>
+      </article>
+
+      <article class="card" data-info="category">
+        <header><span class="num">03</span><h2 data-i18n="cCategory">Revenue by product category</h2><button class="info">i</button></header>
+        <div class="chart" id="chCategory"></div>
+      </article>
+
+      <article class="card" data-info="genre">
+        <header><span class="num">04</span><h2 data-i18n="cGenre">Which genres drive revenue?</h2><button class="info">i</button></header>
+        <div class="chart" id="chGenre"></div>
+      </article>
+
+      <article class="card" data-info="artist">
+        <header><span class="num">05</span><h2 data-i18n="cArtist">Top artists by revenue</h2><button class="info">i</button></header>
+        <div class="chart" id="chArtist"></div>
+      </article>
+
+      <article class="card" data-info="customers">
+        <header><span class="num">06</span><h2 data-i18n="cCustomers">Who are the top customers?</h2><button class="info">i</button></header>
+        <div class="chart" id="chCustomers"></div>
+      </article>
+
+      <article class="card" data-info="segments">
+        <header><span class="num">07</span><h2 data-i18n="cSegments">Customer value segments</h2><button class="info">i</button></header>
+        <div class="chart" id="chSegments"></div>
+      </article>
+    </section>
+
+    <!-- RECOMMENDATIONS -->
+    <section class="reco">
+      <h2 data-i18n="recoTitle">Key recommendations</h2>
+      <div class="reco-grid">
+        <div class="reco-item"><span class="r-shape circle"></span><h3 data-i18n="r1t">Protect the VIPs</h3><p data-i18n="r1">4% of customers bring 31% of revenue. Launch a loyalty tier with early access to limited pressings.</p></div>
+        <div class="reco-item"><span class="r-shape square"></span><h3 data-i18n="r2t">Prepare for Q4</h3><p data-i18n="r2">Nov–Dec = 24.5% of yearly revenue. Build stock 8 weeks ahead and bundle turntables with vinyl.</p></div>
+        <div class="reco-item"><span class="r-shape triangle"></span><h3 data-i18n="r3t">Grow Germany &amp; UK</h3><p data-i18n="r3">Markets #2 and #3 at 60% of France's level. Localised ads and faster shipping are the cheapest lever.</p></div>
+        <div class="reco-item"><span class="r-shape bar"></span><h3 data-i18n="r4t">Cross-sell hi-fi</h3><p data-i18n="r4">Vinyl buyers are the entry point; hi-fi carries the high baskets. Recommend equipment after the 3rd vinyl order.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p data-i18n="footer">Portfolio project · Fictional data · Built with HTML, CSS &amp; vanilla JavaScript</p>
+  </footer>
+
+  <!-- TOOLTIP & MODAL -->
+  <div id="tooltip"></div>
+  <div id="modal" class="modal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <span class="m-shape"></span>
+        <h3 id="mTitle"></h3>
+        <button id="mClose" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <h4 data-i18n="mWhat">WHAT IT SHOWS</h4><p id="mWhat"></p>
+        <h4 data-i18n="mInsight">KEY INSIGHT</h4><p id="mInsight"></p>
+        <h4 data-i18n="mAction">BUSINESS ACTION</h4><p id="mAction"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
